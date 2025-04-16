@@ -1,0 +1,27 @@
+{
+  "id": "devdocs/libraries/pagination",
+  "title": "Pagination",
+  "description": "Pagination is a **Wanuau** built in library that is used to split up large amounts of content into separate pages. Instead of loading everything at once—which can slow down a site or overwhelm users—pagination helps break it up into smaller, more manageable chunks.",
+  "source": "@site/docs/devdocs/libraries/pagination.md",
+  "sourceDirName": "devdocs/libraries",
+  "slug": "/devdocs/libraries/pagination",
+  "permalink": "/docs/devdocs/libraries/pagination",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/devdocs/libraries/pagination.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Hash",
+    "permalink": "/docs/devdocs/libraries/hash"
+  },
+  "next": {
+    "title": "Session",
+    "permalink": "/docs/devdocs/libraries/session"
+  }
+}

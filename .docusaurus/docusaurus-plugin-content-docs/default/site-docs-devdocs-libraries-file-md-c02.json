@@ -1,0 +1,27 @@
+{
+  "id": "devdocs/libraries/file",
+  "title": "File",
+  "description": "Table is a **Wanuau** built in library that can be used to show records in a table.",
+  "source": "@site/docs/devdocs/libraries/file.md",
+  "sourceDirName": "devdocs/libraries",
+  "slug": "/devdocs/libraries/file",
+  "permalink": "/docs/devdocs/libraries/file",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/devdocs/libraries/file.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Cache",
+    "permalink": "/docs/devdocs/libraries/cache"
+  },
+  "next": {
+    "title": "Hash",
+    "permalink": "/docs/devdocs/libraries/hash"
+  }
+}
