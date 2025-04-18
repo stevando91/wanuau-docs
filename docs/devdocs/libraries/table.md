@@ -14,7 +14,8 @@ A table used to show records is a structured way to organize and display data. T
 - **Entry selection feature**: We just have to call [with_entry](#with_entry) to enable the feature.
 - **Filter feature**: We just have to call [with_filter](#with_filter) to enable the feature.
 - **Sorting feature**: We just have to call [sort](#sort) to enable the feature.
-- **Checkbox and bulk action feature**: We just have to call [with_checkbox](#with_checkbox) to enable the feature.
+- **Checkbox with its bulk action buttons feature**: We just have to call [with_checkbox](#with_checkbox) to enable the feature.
+- **Column action buttons feature**: We just have them to records in [add data to record](#4-adding-additional-data-to-each-record).
 
 ## Setting up the route
 
@@ -417,10 +418,10 @@ foreach ($users as $user) {
         ],
     ]);
 
-    // Set column link.
+    // Add column link.
     $user->set('name_link', 'setting/users/' . $user->get_id());
 
-    // Set column download link.
+    // Add column download link.
     $user->set('avatar_download_link', 'setting/users/' . $user->get_avatar());
 }
 ```
