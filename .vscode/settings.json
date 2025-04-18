@@ -1,0 +1,10 @@
+{
+    "files.autoSave": "onFocusChange",
+    // "intelephense.environment.shortOpenTag": false,
+    "emmet.includeLanguages": {
+        "mustache": "html",
+        "handlebars": "html",
+        "hbs": "html"
+    },
+    "window.zoomLevel": 0
+}

@@ -36,8 +36,8 @@ use Wanuau\Lib\Pagination\Pagination;
 
 To create a new instance of **Pagination**, it takes two parameter which are:
 
-- Param `numberOfRecords` is a number of records - `int` (Required).
-- Param `paginationElementId` is an element in which the **Pagination** is wrapped/located `string` (Required).
+- Param `numberOfRecords` is a number of records - `int` <span style={{ color: 'red' }}>(Required)</span>.
+- Param `paginationElementId` is an element in which the **Pagination** is wrapped/located `string` <span style={{ color: 'red' }}>(Required)</span>.
 
 ```php
 $pagination = new Pagination(100, 'user-list');

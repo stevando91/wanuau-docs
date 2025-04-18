@@ -18,7 +18,7 @@ A table used to show records is a structured way to organize and display data. T
 
 ## Setting up the route
 
-When using **[Pagination](pagination)**, the route has to include an extra uri of `Route::PAGINATION_PAGE` and it has to be a POST http request method.
+When using **[Pagination](pagination)**, the route has to include an extra uri of `Route::PAGINATION_PAGE` and it has to be a POST and GET http request method.
 
 Please click **[here](../route)** to learn how to create a route.
 
@@ -40,7 +40,7 @@ use Wanuau\Lib\Table;
 
 To create a new instance of **Table**, it takes one parameter which is:
 
-- Param `tableId`: Table unique ID `string` (Required)
+- Param `tableId`: Table unique ID `string` <span style={{ color: 'red' }}>(Required)</span>
 
 ```php
 $table = new Table('user-table');
@@ -160,8 +160,8 @@ $table->set_column_download_link(['avatar' => 'avatar_download_link']);
 
 This API is used to use pagination in table and accepts two parameters, which are:
 
-- Param `numberOfRecords` is a number of records - `int` (Required).
-- Param `paginationElementId` is an element in which the pagination is wrapped/located `string` (Required).
+- Param `numberOfRecords` is a number of records - `int` <span style={{ color: 'red' }}>(Required)</span>.
+- Param `paginationElementId` is an element in which the pagination is wrapped/located `string` <span style={{ color: 'red' }}>(Required)</span>.
 
 :::warning Note
 This API must be called before calling:
@@ -272,16 +272,17 @@ $table->with_filter([
 
 This API is used set to use checkbox in table and accepts two parameters which are:
 
-- Param `bulkActionButtons`: checkbox bulk action button - `array` (Required)
-    - Group key should be unique to two actions for example: `'suspend:restore'`, the action must always be paired with `restore`.
-    - Value should have two array of actions for example: `'suspend'` and `'restore'`. Inside each action array, there must be the following `keys` set.
-        - Set `'text'` => `'Suspend'`: Used as a label (Required).
-        - Set `'class'` => `'btn btn-warning'`: Used as the action button style (Required).
-        - Set `'icon'` => `'fa fa-user-slash'`: Used as the action button icon (Required).
-        - Set `'action'` => `'suspend'`: Action used by the action button (Required).
-        - Set `'route'` => `'setting/users/suspend'`: Action used by the action button (Required).
-        - Set `'method'` => `Route::POST`: Action used by the action button (Required).
-        - Set `'confirm'` => `true`: Action used by the action button (Optional, defaulted to `false`).
+- Param `bulkActionButtons`: checkbox bulk action button - `array` <span style={{ color: 'red' }}>(Required)</span>
+    1. Group key should be unique to two actions for example: `'suspend:restore'`, the action must always be paired with `restore`.
+    2. Value should have two array of actions for example: `'suspend'` and `'restore'`. Inside each action array, there must be the following `keys` set.
+        - Key `'label'` Used as a label <span style={{ color: 'red' }}>(Required)</span>.
+        - Key `'class'` Used as the action button style <span style={{ color: 'red' }}>(Required)</span>.
+        - Key `'icon'` Used as the action button icon <span style={{ color: 'red' }}>(Required)</span>.
+        - Key `'action'` Action used by the action button <span style={{ color: 'red' }}>(Required)</span>.
+        - Key `'route'` Action used by the action button <span style={{ color: 'red' }}>(Required)</span>.
+        - Key `'method'` Action used by the action button <span style={{ color: 'red' }}>(Required)</span>.
+        - Key `'updateContent'` is used if after the action, the content of the page needs to be updated like `delete` - `boolean` (Optional).
+        - Key `'confirm'` Action used by the action button (Optional, defaulted to `false`).
 - Param `style`: use to style how the action buttons are displayed - `string` (Optional: `'group-regular'`, `'group-advanced'`, `'individual'`; Default: `'group-advanced'`)
 
 **Calling the API:**
@@ -291,7 +292,7 @@ $table->with_checkbox([
     // Suspend/restore bulk actions.
     'suspend:restore' => [
         'suspend' => [
-            'text' => 'Suspend',
+            'label' => 'Suspend',
             'class' => 'btn btn-warning',
             'icon' => 'fa fa-user-slash',
             'action' => 'suspend',
@@ -300,7 +301,7 @@ $table->with_checkbox([
             'confirm' => true,
         ],
         'restore' => [
-            'text' => 'Restore',
+            'label' => 'Restore',
             'class' => 'btn btn-success',
             'icon' => 'fa fa-undo',
             'action' => 'restore',
@@ -367,23 +368,54 @@ $users = (new UserModel)
 
 #### 4. Adding additional data to each record
 
-If we want to add more data to each record like `column_link`, `column_download_link` or `toggle_switch`, we can see how they are achieved.
+If we want to add more data to each record like `column_link`, `column_download_link`, `switch_toggle` or `action_buttons`, we can see how they are achieved.
 
-:::note Note
-If adding a `toggle_switch`, the key name must be set to database `'column_name'` + `'_switch'`. For example, `'suspended_switch'` like in the following example where `'suspended'` is a database column name and `'_switch'` is appended to it.
+:::tip Tips!
+
+- When adding a `switch_toggle`, the `key` name must be set to database `'column_name'` + `':switch_toggle'`. For example, `'suspended:switch_toggle'` like in the following example where `'suspended'` is a database column name and `':switch_toggle'` is appended to it.
+
+- When adding `action_buttons`, the `key` name of array of action button is the `action`, for example `'delete'` and `'edit'` in the following example. Each array of action button should at lease include the following `keys` set.
+
+    1. Key `'label'` is a label used in the button or link - `string` <span style={{ color: 'red' }}>(Required)</span>.
+    2. Key `'route'` is the route of the action button - `string` <span style={{ color: 'red' }}>(Required)</span>.
+    3. Key `'selectedId'` is the target id and it is <span style={{ color: 'red' }}>_required_</span> if `'type'` is set to `'button'` - `int` (Optional).
+    4. Key `'confirm'` is used when the action needs a confirmation and it is **_only applied_** to `'button'` type - `boolean` (Optional).
+    5. Key `'type'` is used to show whether it's a button or link - `string` <span style={{ color: 'red' }}>(Required)</span>.
+    6. Key `'updateContent'` is used if after the action, the content of the page needs to be updated like `delete`, and it is **_only applied_**  to `'button'` type - `boolean` (Optional).
+    7. Key `'method'` is the http request method used for the route - `string` <span style={{ color: 'red' }}>(Required)</span>.
+
 :::
 
 ```php
 foreach ($users as $user) {
-    // Add suspended_switch key/value to UserModel.
-    $user->set('suspended_switch', SwitchToggle::render(
+    // Add suspended:switch_toggle key/value to UserModel.
+    $user->set('suspended:switch_toggle', SwitchToggle::render(
         id          : 'MUST BE UNIQUE' => $user->get_username().'-suspend-'.$user->get_id(),
-        value       : (string) 'MUST BE A RECORD UNIQUE ID (PK)' => $user->get_id(),
+        value       : (string) 'MUST BE A RECORD\'s UNIQUE ID (PK)' => $user->get_id(),
         action      : 'ACTION:RESTORE' => 'suspend:restore',
         checkboxId  : 'MUST BE TABLE ID-cb-RECORD UNIQUE ID (PK)' => $table->get_table_id()."-cb-" . $user->get_id(),
         route       : 'MUST A VALID ROUTE' => 'setting/users/suspend',
         enabled     : (bool) $user->get_suspended(),
     ));
+
+    // Add action_buttons key/value to UserModel.
+    $user->set('action_buttons', [
+        'delete' => [
+            'label' => 'Delete user',
+            'route' => 'setting/users/delete',
+            'selectedId' => $user->get_id(),
+            'confirm' => true,
+            'type' => 'button',
+            'updateContent' => true,
+            'method' => Route::POST,
+        ],
+        'edit' => [
+            'label' => 'Edit user',
+            'route' => 'setting/users/edit/'.$user->get_id(),
+            'type' => 'link',
+            'method' => Route::GET,
+        ],
+    ]);
 
     // Set column link.
     $user->set('name_link', 'setting/users/' . $user->get_id());
